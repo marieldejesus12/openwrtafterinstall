@@ -80,7 +80,6 @@ function install() {
   opkg list-upgradable | cut -f 1 -d ' ' | xargs opkg upgrade > /dev/null 2>&1
   echov "Instalando pacotes selecionados..."
   opkg install $proginstall > /dev/null 2>&1
-  rm luci-app-rtorrent_0.1.5_all.ipk
   echov "Programas instalados com êxito..."
   sleep 2
   menu
