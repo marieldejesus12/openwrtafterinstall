@@ -95,27 +95,27 @@ function install() {
   echov "Digite os números das opções desejadas separados por espaço:"
   question
   answer="$answer "
-  if [[ "$(echo $answer | grep '0 ' )" != "" ]]; then
+  if [[ "$(echo $answer | grep 0 )" != "" ]]; then
     sleep 1
     menu
   fi
   proginstall=""
-  if [[ "$(echo $answer | grep '1 ' )" != "" ]]; then
+  if [[ "$(echo $answer | grep 1 )" != "" ]]; then
     proginstall="$proginstall luci-i18n-base-pt-br luci-i18n-firewall-pt-br luci-i18n-opkg-pt-br"
   fi
-  if [[ "$(echo $answer | grep '2 ' )" != "" ]]; then
+  if [[ "$(echo $answer | grep 2 )" != "" ]]; then
     proginstall="$proginstall luci-i18n-adblock-pt-br"
   fi
-  if [[ "$(echo $answer | grep '3 ' )" != "" ]]; then
+  if [[ "$(echo $answer | grep 3 )" != "" ]]; then
     proginstall="$proginstall luci-i18n-banip-pt-br"
   fi
-  if [[ "$(echo $answer | grep '4 ' )" != "" ]]; then
+  if [[ "$(echo $answer | grep 4 )" != "" ]]; then
     proginstall="$proginstall luci-i18n-hd-idle-pt-br"
   fi
-  if [[ "$(echo $answer | grep '5 ' )" != "" ]]; then
+  if [[ "$(echo $answer | grep 5 )" != "" ]]; then
     proginstall="$proginstall luci-app-sqm"
   fi
-  if [[ "$(echo $answer | grep '6 ' )" != "" ]]; then
+  if [[ "$(echo $answer | grep 6 )" != "" ]]; then
     proginstall="$proginstall luci-i18n-transmission-pt-br transmission-daemon-mbedtls transmission-remote-mbedtls transmission-web transmission-cli-mbedtls"
   fi
   echov "Atualizando lista de pacotes..."
