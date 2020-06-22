@@ -111,12 +111,12 @@ function youblock() {
         opkg install luci-i18n-adblock-pt-br > /dev/null 2>&1
       fi
       echov "Instalando script da lista do Adblock..."
-      wget https://gitlab.com/marieldejesus12/youtube-pihole-adblock/-/raw/master/openwrt_adblock.sh -O /tmp/openwrt_adblock.sh > /dev/null 2>&1 && sh /tmp/openwrt_adblock.sh install && echov "Instalação do script de listas Adblock concluída..." || echov "Algo deu errado, por favor tente novamente..."
+      wget https://gitlab.com/marieldejesus12/youtube-pihole-adblock/-/raw/master/openwrt_adblock.sh -O /tmp/openwrt_adblock.sh > /dev/null 2>&1 && ash /tmp/openwrt_adblock.sh install && echov "Instalação do script de listas Adblock concluída..." || echov "Algo deu errado, por favor tente novamente..."
       sleep 3
       youblock;;
     2 )
       echov "Instalando script de coleta de urls..."
-      wget https://gitlab.com/marieldejesus12/youtube-pihole-adblock/-/raw/master/openwrt_collect.sh -O /tmp/openwrt_collect.sh > /dev/null 2>&1 && sh /tmp/openwrt_collect.sh install && echov "Instalação do script de coleta de urls concluída..." || echov "Algo deu errado, por favor tente novamente..."
+      wget https://gitlab.com/marieldejesus12/youtube-pihole-adblock/-/raw/master/openwrt_collect.sh -O /tmp/openwrt_collect.sh > /dev/null 2>&1 && ash /tmp/openwrt_collect.sh install && echov "Instalação do script de coleta de urls concluída..." || echov "Algo deu errado, por favor tente novamente..."
       sleep 3
       youblock;;
     3 )
@@ -128,9 +128,9 @@ function youblock() {
         opkg install luci-i18n-adblock-pt-br > /dev/null 2>&1
       fi
       echov "Instalando script da lista do Adblock..."
-      wget https://gitlab.com/marieldejesus12/youtube-pihole-adblock/-/raw/master/openwrt_adblock.sh -O /tmp/openwrt_adblock.sh > /dev/null 2>&1 && sh /tmp/openwrt_adblock.sh install && echov "Instalação do script de listas Adblock concluída..." || echov "Algo deu errado, por favor tente novamente..."
+      wget https://gitlab.com/marieldejesus12/youtube-pihole-adblock/-/raw/master/openwrt_adblock.sh -O /tmp/openwrt_adblock.sh > /dev/null 2>&1 && ash /tmp/openwrt_adblock.sh install && echov "Instalação do script de listas Adblock concluída..." || echov "Algo deu errado, por favor tente novamente..."
       echov "Instalando script de coleta de urls..."
-      wget https://gitlab.com/marieldejesus12/youtube-pihole-adblock/-/raw/master/openwrt_collect.sh -O /tmp/openwrt_collect.sh > /dev/null 2>&1 && sh /tmp/openwrt_collect.sh install && echov "Instalação do script de coleta de urls concluída..." || echov "Algo deu errado, por favor tente novamente..."
+      wget https://gitlab.com/marieldejesus12/youtube-pihole-adblock/-/raw/master/openwrt_collect.sh -O /tmp/openwrt_collect.sh > /dev/null 2>&1 && ash /tmp/openwrt_collect.sh install && echov "Instalação do script de coleta de urls concluída..." || echov "Algo deu errado, por favor tente novamente..."
       sleep 3
       menu;;
     0 )
