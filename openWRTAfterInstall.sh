@@ -110,12 +110,12 @@ function youblock() {
       wgett
       openwrt_adblock
       sleep 3
-      youblock;;
+      menu;;
     2 )
       wgett
       openwrt_collect
       sleep 3
-      youblock;;
+      menu;;
     3 )
       adblockk
       wgett
