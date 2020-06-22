@@ -228,25 +228,27 @@ if [[ "$(df | grep "/dev/sd" | grep "/overlay")" = "" ]]; then
   fi
 fi
 
-if [[ $(free -m | grep Swap | awk '{print $2}') -eq 0 ]]; then
-  echoTitle "Menu SWAP"
-  echov "SWAP não detectada. Deseja configurar SWAP? [s/n]"
-  question
-  if [[ "$answer" = "s" ]]; then
-    echov "Digite um tamanho para a SWAP em MB: [ex: 128]"
+if [[ "$(df | grep "/dev/sd" | grep "/overlay")" != "" ]]; then
+  if [[ $(free -m | grep Swap | awk '{print $2}') -eq 0 ]]; then
+    echoTitle "Menu SWAP"
+    echov "SWAP não detectada. Deseja configurar SWAP? [s/n]"
     question
-    dd if=/dev/zero of=/swap bs=1M count=$answer
-    mkswap /swap
-    uci -q delete fstab.swap
-    uci set fstab.swap="swap"
-    uci set fstab.swap.device="/swap"
-    uci commit fstab
-    /etc/init.d/fstab boot
-    if [[ "$(grep 'fstab boot' /etc/rc.local)" = "" ]]; then
-      sed -i 's|exit 0|/etc/init.d/fstab boot\nexit 0|' /etc/rc.local
+    if [[ "$answer" = "s" ]]; then
+      echov "Digite um tamanho para a SWAP em MB: [ex: 128]"
+      question
+      dd if=/dev/zero of=/swap bs=1M count=$answer
+      mkswap /swap
+      uci -q delete fstab.swap
+      uci set fstab.swap="swap"
+      uci set fstab.swap.device="/swap"
+      uci commit fstab
+      /etc/init.d/fstab boot
+      if [[ "$(grep 'fstab boot' /etc/rc.local)" = "" ]]; then
+        sed -i 's|exit 0|/etc/init.d/fstab boot\nexit 0|' /etc/rc.local
+      fi
+      echov "SWAP configurada com êxito..."
+      sleep 3
     fi
-    echov "SWAP configurada com êxito..."
-    sleep 3
   fi
 fi
 
