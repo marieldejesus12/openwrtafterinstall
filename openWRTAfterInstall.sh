@@ -51,7 +51,6 @@ function install() {
   echo "4 - Instalar HD-Idle"
   echo "5 - Instalar SQM Scripts"
   echo "6 - Instalar Transmission"
-  echo "7 - Instalar rTorrent"
   echo ""
   echo "0 - Voltar ao menu anterior"
   echov "Digite os números das opções desejadas separados por espaço:"
@@ -74,10 +73,6 @@ function install() {
   fi
   if [[ "$(echo $answer | grep 6 )" != "" ]]; then
     proginstall="$proginstall luci-i18n-transmission-pt-br transmission-daemon-mbedtls transmission-remote-mbedtls transmission-web transmission-cli-mbedtls"
-  fi
-  if [[ "$(echo $answer | grep 7 )" != "" ]]; then
-    wget https://github.com/wolandmaster/luci-app-rtorrent/releases/download/0.1.5/luci-app-rtorrent_0.1.5_all.ipk > /dev/null 2>&1
-    proginstall="$proginstall rtorrent-rpc luci-app-rtorrent_0.1.5_all.ipk"
   fi
   echov "Atualizando lista de pacotes..."
   opkg update > /dev/null 2>&1
