@@ -26,7 +26,9 @@ function menu() {
   echo "0 - Sair do script"
   echov "Digite o número da opção desejada:"
   question
-  sleep 1
+  if [[ "$answer" != "0" ]]; then
+    sleep 1
+  fi
   case $answer in
     1 )
       install;;
@@ -56,27 +58,28 @@ function install() {
   echo "0 - Voltar ao menu anterior"
   echov "Digite os números das opções desejadas separados por espaço:"
   question
-  if [[ "$(echo $answer | grep 0 )" != "" ]]; then
+  answer="$answer "
+  if [[ "$(echo $answer | grep '0 ' )" != "" ]]; then
     sleep 1
     menu
   fi
   proginstall=""
-  if [[ "$(echo $answer | grep 1 )" != "" ]]; then
+  if [[ "$(echo $answer | grep '1 ' )" != "" ]]; then
     proginstall="$proginstall luci-i18n-base-pt-br luci-i18n-firewall-pt-br luci-i18n-opkg-pt-br"
   fi
-  if [[ "$(echo $answer | grep 2 )" != "" ]]; then
+  if [[ "$(echo $answer | grep '2 ' )" != "" ]]; then
     proginstall="$proginstall luci-i18n-adblock-pt-br"
   fi
-  if [[ "$(echo $answer | grep 3 )" != "" ]]; then
+  if [[ "$(echo $answer | grep '3 ' )" != "" ]]; then
     proginstall="$proginstall luci-i18n-banip-pt-br"
   fi
-  if [[ "$(echo $answer | grep 4 )" != "" ]]; then
+  if [[ "$(echo $answer | grep '4 ' )" != "" ]]; then
     proginstall="$proginstall luci-i18n-hd-idle-pt-br"
   fi
-  if [[ "$(echo $answer | grep 5 )" != "" ]]; then
+  if [[ "$(echo $answer | grep '5 ' )" != "" ]]; then
     proginstall="$proginstall luci-app-sqm"
   fi
-  if [[ "$(echo $answer | grep 6 )" != "" ]]; then
+  if [[ "$(echo $answer | grep '6 ' )" != "" ]]; then
     proginstall="$proginstall luci-i18n-transmission-pt-br transmission-daemon-mbedtls transmission-remote-mbedtls transmission-web transmission-cli-mbedtls"
   fi
   echov "Atualizando lista de pacotes..."
@@ -103,35 +106,22 @@ function youblock() {
   sleep 1
   case $answer in
     1 )
-      if [[ ! -e /etc/init.d/adblock ]]; then
-        echov "Adblock não instalado, instalando..."
-        echov "Atualizando lista de pacotes..."
-        opkg update > /dev/null 2>&1
-        echov "Instalando o Adblock agora..."
-        opkg install luci-i18n-adblock-pt-br > /dev/null 2>&1
-      fi
-      echov "Instalando script da lista do Adblock..."
-      wget https://gitlab.com/marieldejesus12/youtube-pihole-adblock/-/raw/master/openwrt_adblock.sh -O /tmp/openwrt_adblock.sh > /dev/null 2>&1 && ash /tmp/openwrt_adblock.sh install && echov "Instalação do script de listas Adblock concluída..." || echov "Algo deu errado, por favor tente novamente..."
+      adblockk
+      wgett
+      openwrt_adblock
       sleep 3
       youblock;;
     2 )
-      echov "Instalando script de coleta de urls..."
-      wget https://gitlab.com/marieldejesus12/youtube-pihole-adblock/-/raw/master/openwrt_collect.sh -O /tmp/openwrt_collect.sh > /dev/null 2>&1 && ash /tmp/openwrt_collect.sh install && echov "Instalação do script de coleta de urls concluída..." || echov "Algo deu errado, por favor tente novamente..."
+      wgett
+      openwrt_collect
       sleep 3
       youblock;;
     3 )
-      if [[ ! -e /etc/init.d/adblock ]]; then
-        echov "Adblock não instalado, instalando..."
-        echov "Atualizando lista de pacotes..."
-        opkg update > /dev/null 2>&1
-        echov "Instalando o Adblock agora..."
-        opkg install luci-i18n-adblock-pt-br > /dev/null 2>&1
-      fi
-      echov "Instalando script da lista do Adblock..."
-      wget https://gitlab.com/marieldejesus12/youtube-pihole-adblock/-/raw/master/openwrt_adblock.sh -O /tmp/openwrt_adblock.sh > /dev/null 2>&1 && ash /tmp/openwrt_adblock.sh install && echov "Instalação do script de listas Adblock concluída..." || echov "Algo deu errado, por favor tente novamente..."
+      adblockk
+      wgett
+      openwrt_adblock
       sleep 3
-      echov "Instalando script de coleta de urls..."
-      wget https://gitlab.com/marieldejesus12/youtube-pihole-adblock/-/raw/master/openwrt_collect.sh -O /tmp/openwrt_collect.sh > /dev/null 2>&1 && ash /tmp/openwrt_collect.sh install && echov "Instalação do script de coleta de urls concluída..." || echov "Algo deu errado, por favor tente novamente..."
+      openwrt_collect
       sleep 3
       menu;;
     0 )
@@ -142,6 +132,36 @@ function youblock() {
       sleep 2
       youblock;;
   esac
+}
+
+function openwrt_adblock() {
+  echov "Instalando script da lista do Adblock..."
+  wget https://gitlab.com/marieldejesus12/youtube-pihole-adblock/-/raw/master/openwrt_adblock.sh -O /tmp/openwrt_adblock.sh > /dev/null 2>&1 && ash /tmp/openwrt_adblock.sh install && echov "Instalação do script de listas Adblock concluída..." || echov "Algo deu errado, por favor tente novamente..."
+}
+
+function openwrt_collect() {
+  echov "Instalando script de coleta de urls..."
+  wget https://gitlab.com/marieldejesus12/youtube-pihole-adblock/-/raw/master/openwrt_collect.sh -O /tmp/openwrt_collect.sh > /dev/null 2>&1 && ash /tmp/openwrt_collect.sh install && echov "Instalação do script de coleta de urls concluída..." || echov "Algo deu errado, por favor tente novamente..."
+}
+
+function adblockk() {
+  if [[ ! -e /etc/init.d/adblock ]]; then
+    echov "Adblock não instalado, instalando..."
+    echov "Atualizando lista de pacotes..."
+    opkg update > /dev/null 2>&1
+    echov "Instalando o Adblock agora..."
+    opkg install luci-i18n-adblock-pt-br > /dev/null 2>&1
+  fi
+}
+
+function wgett() {
+  if [[ ! -e /usr/bin/wget ]]; then
+    echov "Wget não instalado, instalando..."
+    echov "Atualizando lista de pacotes..."
+    opkg update > /dev/null 2>&1
+    echov "Instalando o Wget agora..."
+    opkg install wget > /dev/null 2>&1
+  fi
 }
 
 if [[ "$(df | grep "/dev/sd" | grep "/overlay")" = "" ]]; then
