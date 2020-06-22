@@ -15,4 +15,9 @@
 
 **Uso:**
 
-  Baixe o script e execute o mesmo com `sh openWRTAfterInstall.sh`
+Baixe o script e execute o mesmo com `sh openWRTAfterInstall.sh`
+
+Por exemplo
+```bash
+wget https://gitlab.com/marieldejesus12/openwrtafterinstall/-/raw/master/openWRTAfterInstall.sh -O /tmp/openWRTAfterInstall.sh && sh /tmp/openWRTAfterInstall.sh
+```
