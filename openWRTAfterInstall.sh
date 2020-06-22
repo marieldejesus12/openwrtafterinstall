@@ -26,6 +26,7 @@ function menu() {
   echo "0 - Sair do script"
   echov "Digite o número da opção desejada:"
   question
+  sleep 1
   case $answer in
     1 )
       install;;
@@ -99,6 +100,7 @@ function youblock() {
   echo "0 - Voltar ao menu anterior"
   echov "Digite a opção desejada:"
   question
+  sleep 1
   case $answer in
     1 )
       if [[ ! -e /etc/init.d/adblock ]]; then
@@ -248,6 +250,7 @@ if [[ "$(df | grep "/dev/sd" | grep "/overlay")" != "" ]]; then
       fi
       echov "SWAP configurada com êxito..."
       sleep 3
+      menu
     fi
   fi
 fi
