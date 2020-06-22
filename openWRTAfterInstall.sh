@@ -77,11 +77,11 @@ function install() {
   fi
   if [[ "$(echo $answer | grep 7 )" != "" ]]; then
     wget https://github.com/wolandmaster/luci-app-rtorrent/releases/download/0.1.5/luci-app-rtorrent_0.1.5_all.ipk > /dev/null 2>&1
-    proginstall="$proginstall rtorrent rtorrent-rpc luci-app-rtorrent_0.1.5_all.ipk"
+    proginstall="$proginstall rtorrent-rpc luci-app-rtorrent_0.1.5_all.ipk"
   fi
   echov "Atualizando lista de pacotes..."
   opkg update > /dev/null 2>&1
-  echov "Atualizando todos os pacotes Instalados..."
+  echov "Atualizando todos os pacotes instalados..."
   opkg list-upgradable | cut -f 1 -d ' ' | xargs opkg upgrade > /dev/null 2>&1
   echov "Instalando pacotes selecionados..."
   opkg install $proginstall > /dev/null 2>&1
