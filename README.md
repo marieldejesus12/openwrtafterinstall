@@ -2,7 +2,7 @@
 
 #### Script de pós instalação do OpenWRT.
 
-Este script é capaz de:
+**Este script é capaz de:**
  - Configurar EXTROOT
  - Configurar SWAP no EXTROOT
  - Instalar pacotes de tradução pt-br da Luci
@@ -12,5 +12,6 @@ Este script é capaz de:
  - Instalar SQM Scripts
  - Instalar Transmission
 
-Uso:
+**Uso:**
+
   Baixe o script e execute o mesmo com `sh openWRTAfterInstall.sh`
