@@ -1,4 +1,40 @@
 #!/usr/bin/env ash
+#
+# ------------------------------------------------------------------------------
+#
+# OpenWRT After Install Script
+#
+# AUTOR:	Mariel de Jesus™ <marieldejesus12@gmail.com>
+# MANTENEDORES:
+#
+# VERSÃO: 1
+#
+# ------------------------------------------------------------------------------
+#
+# DESCRIÇÃO:
+#
+# Este script faz várias instalações e configurações quem não vem por padrão no
+#    OpenWRT.
+#
+# ------------------------------------------------------------------------------
+#
+# LICENÇA:
+# Este programa é Software Livre, você pode redistribui-lo e/ou modificá-lo sob
+# os termos da Licença Pública Geral GNU Versão 3 publicada pela Free Software
+# Foundation.
+#
+# Este programa é distribuído na esperança de que seja útil, mas SEM NENHUMA
+# GARANTIA; Sem mesmo implicar garantias de COMERCIABILIDADE ou ADAPTAÇÃO A UM
+# PROPÓSITO PARTICULAR. Veja a Licença Pública Geral GNU (GPL) para mais
+# detalhes (https://www.gnu.org/licenses/gpl-3.0.html).
+#
+# ------------------------------------------------------------------------------
+#
+# DEPENDÊNCIAS:
+#
+# wget
+#
+# ------------------------------------------------------------------------------
 
 function echoTitle() {
   clear
