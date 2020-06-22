@@ -2,9 +2,9 @@
 
 function echoTitle() {
   clear
-  echo -e "\033[01;31m###\033[00;37m"
-  echo -e "\033[01;31m###### openWRTAfterInstall - $1\033[00;37m"
-  echo -e "\033[01;31m###\033[00;37m"
+  echo -e "\033[01;34m###\033[00;37m"
+  echo -e "\033[01;34m###### openWRTAfterInstall - $1\033[00;37m"
+  echo -e "\033[01;34m###\033[00;37m"
 }
 
 function echov(){
