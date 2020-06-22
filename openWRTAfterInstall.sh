@@ -55,6 +55,10 @@ function install() {
   echo "0 - Voltar ao menu anterior"
   echov "Digite os números das opções desejadas separados por espaço:"
   question
+  if [[ "$(echo $answer | grep 0 )" != "" ]]; then
+    sleep 1
+    menu
+  fi
   proginstall=""
   if [[ "$(echo $answer | grep 1 )" != "" ]]; then
     proginstall="$proginstall luci-i18n-base-pt-br luci-i18n-firewall-pt-br luci-i18n-opkg-pt-br"
@@ -123,11 +127,13 @@ function youblock() {
       fi
       echov "Instalando script da lista do Adblock..."
       wget https://gitlab.com/marieldejesus12/youtube-pihole-adblock/-/raw/master/openwrt_adblock.sh -O /tmp/openwrt_adblock.sh > /dev/null 2>&1 && ash /tmp/openwrt_adblock.sh install && echov "Instalação do script de listas Adblock concluída..." || echov "Algo deu errado, por favor tente novamente..."
+      sleep 3
       echov "Instalando script de coleta de urls..."
       wget https://gitlab.com/marieldejesus12/youtube-pihole-adblock/-/raw/master/openwrt_collect.sh -O /tmp/openwrt_collect.sh > /dev/null 2>&1 && ash /tmp/openwrt_collect.sh install && echov "Instalação do script de coleta de urls concluída..." || echov "Algo deu errado, por favor tente novamente..."
       sleep 3
       menu;;
     0 )
+      sleep 1
       menu;;
     * )
       echov "Opção inválida, tente novamente..."
@@ -152,8 +158,10 @@ if [[ "$(df | grep "/dev/sd" | grep "/overlay")" = "" ]]; then
     uci set fstab.rwm.device="${DEVICE}"
     uci set fstab.rwm.target="/rwm"
     uci commit fstab
+    sleep 2
     while : ; do
       echov "Detectando dispositivos..."
+      sleep 1
       echov "Dispositivos detectados:"
       devices=""
       for i in $(ls /dev/sd[a,b,c]); do
@@ -171,6 +179,7 @@ if [[ "$(df | grep "/dev/sd" | grep "/overlay")" = "" ]]; then
     done
     while : ; do
       echov "Detectando partições..."
+      sleep 1
       echov "Partições detectadas:"
       partitions=""
       for i in $(ls /dev/$device[1,2,3,4,5,6,7,8,9,10]); do
@@ -192,7 +201,7 @@ if [[ "$(df | grep "/dev/sd" | grep "/overlay")" = "" ]]; then
       echov "Formatando a partição /dev/$part..."
       mkfs.ext4 /dev/$part
     fi
-    echov Configurando /dev/$part para EXTROOT...
+    echov "Configurando /dev/$part para EXTROOT..."
     DEVICE="/dev/$part"
     eval $(block info "${DEVICE}" | grep -o -e "UUID=\S*")
     uci -q delete fstab.overlay
@@ -200,14 +209,19 @@ if [[ "$(df | grep "/dev/sd" | grep "/overlay")" = "" ]]; then
     uci set fstab.overlay.uuid="${UUID}"
     uci set fstab.overlay.target="/overlay"
     uci commit fstab
+    sleep 2
     echov "Montando EXTROOT..."
     mount /dev/$part /mnt
+    sleep 1
     echov "Copiando arquivos para EXTROOT..."
     cp -a -f /overlay/. /mnt
+    sleep 1
     echov "Configurando OPKG..."
     sed -i 's|lists_dir ext /var/opkg-lists|lists_dir ext /usr/lib/opkg/lists|' /mnt/usr/lib/opkg/lists
+    sleep 1
     echov "Desmontando EXTROOT..."
     umount /mnt
+    sleep 1
     echov "Reiniciando o router em 10 segundos..."
     sleep 10
     reboot
@@ -231,6 +245,8 @@ if [[ $(free -m | grep Swap | awk '{print $2}') -eq 0 ]]; then
     if [[ "$(grep 'fstab boot' /etc/rc.local)" = "" ]]; then
       sed -i 's|exit 0|/etc/init.d/fstab boot\nexit 0|' /etc/rc.local
     fi
+    echov "SWAP configurada com êxito..."
+    sleep 3
   fi
 fi
 
