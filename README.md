@@ -4,7 +4,7 @@
 
 **Este script é capaz de:**
  - Configurar [EXTROOT](https://openwrt.org/docs/guide-user/additional-software/extroot_configuration)
- - Configurar SWAP no [EXTROOT](https://openwrt.org/docs/guide-user/additional-software/extroot_configuration)
+ - Configurar [SWAP](https://openwrt.org/docs/guide-user/additional-software/extroot_configuration#devices_32_mb_ram) no [EXTROOT](https://openwrt.org/docs/guide-user/additional-software/extroot_configuration)
  - Instalar pacotes de tradução pt-br da [Luci](https://openwrt.org/docs/guide-user/luci/start)
  - Instalar [Adblock](https://github.com/openwrt/packages/tree/master/net/adblock/files)
  - Instalar [banIP](https://github.com/openwrt/packages/tree/master/net/banip/files)
