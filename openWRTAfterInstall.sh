@@ -76,7 +76,8 @@ function install() {
     proginstall="$proginstall luci-i18n-transmission-pt-br transmission-daemon-mbedtls transmission-remote-mbedtls transmission-web transmission-cli-mbedtls"
   fi
   if [[ "$(echo $answer | grep 7 )" != "" ]]; then
-    proginstall="$proginstall luci-app-sqm"
+    wget https://github.com/wolandmaster/luci-app-rtorrent/releases/download/0.1.5/luci-app-rtorrent_0.1.5_all.ipk > /dev/null 2>&1
+    proginstall="$proginstall rtorrent rtorrent-rpc luci-app-rtorrent_0.1.5_all.ipk"
   fi
   echov "Atualizando lista de pacotes..."
   opkg update > /dev/null 2>&1
@@ -84,6 +85,7 @@ function install() {
   opkg list-upgradable | cut -f 1 -d ' ' | xargs opkg upgrade > /dev/null 2>&1
   echov "Instalando pacotes selecionados..."
   opkg install $proginstall > /dev/null 2>&1
+  rm luci-app-rtorrent_0.1.5_all.ipk
   echov "Programas instalados com êxito..."
   sleep 2
   menu
