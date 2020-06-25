@@ -11,7 +11,7 @@
  - Instalar [HD-Idle](https://openwrt.org/docs/guide-user/storage/hd-idle)
  - Instalar [SQM Scripts](https://openwrt.org/docs/guide-user/network/traffic-shaping/sqm)
  - Instalar [Transmission](https://transmissionbt.com/)
- - Instalar os scripts do [YouTube Pihole Adblock](https://gitlab.com/marieldejesus12/youtube-pihole-adblock)
+ - Instalar os scripts do [YouTube BlockList](https://gitlab.com/marieldejesus12/youtube-listblock)
 
 **Uso:**
 

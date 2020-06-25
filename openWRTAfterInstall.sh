@@ -57,7 +57,7 @@ function menu() {
   echoTitle "Menu Principal"
   echov "Opções:"
   echo "1 - Instalar pacotes"
-  echo "2 - Instalar Scripts de Bloqueio do Youtube + Adblock"
+  echo "2 - Instalar Scripts de Bloqueio do Youtube BlockList + Adblock"
   echo ""
   echo "0 - Sair do script"
   echov "Digite o número da opção desejada:"
@@ -130,7 +130,7 @@ function install() {
 }
 
 function youblock() {
-  echoTitle "Instalador do Script de Bloqueio do Youtube + Adblock"
+  echoTitle "Instalador do Script de Bloqueio do Youtube BlackList + Adblock"
   echov "Opções para instalação:"
   echo "1 - Instalar somente script da lista do Adblock"
   echo "2 - Instalar somente script de coleta de urls"
@@ -172,12 +172,12 @@ function youblock() {
 
 function openwrt_adblock() {
   echov "Instalando script da lista do Adblock..."
-  wget https://gitlab.com/marieldejesus12/youtube-pihole-adblock/-/raw/master/openwrt_adblock.sh -O /tmp/openwrt_adblock.sh > /dev/null 2>&1 && ash /tmp/openwrt_adblock.sh install && echov "Instalação do script de listas Adblock concluída..." || echov "Algo deu errado, por favor tente novamente..."
+  wget https://gitlab.com/marieldejesus12/youtube-listblock/-/raw/master/openwrt_adblock.sh -O /tmp/openwrt_adblock.sh > /dev/null 2>&1 && ash /tmp/openwrt_adblock.sh install && echov "Instalação do script de listas Adblock concluída..." || echov "Algo deu errado, por favor tente novamente..."
 }
 
 function openwrt_collect() {
   echov "Instalando script de coleta de urls..."
-  wget https://gitlab.com/marieldejesus12/youtube-pihole-adblock/-/raw/master/openwrt_collect.sh -O /tmp/openwrt_collect.sh > /dev/null 2>&1 && ash /tmp/openwrt_collect.sh install && echov "Instalação do script de coleta de urls concluída..." || echov "Algo deu errado, por favor tente novamente..."
+  wget https://gitlab.com/marieldejesus12/youtube-listblock/-/raw/master/openwrt_collect.sh -O /tmp/openwrt_collect.sh > /dev/null 2>&1 && ash /tmp/openwrt_collect.sh install && echov "Instalação do script de coleta de urls concluída..." || echov "Algo deu errado, por favor tente novamente..."
 }
 
 function adblockk() {
